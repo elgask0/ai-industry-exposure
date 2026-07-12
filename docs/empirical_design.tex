@@ -1,0 +1,220 @@
+\documentclass[11pt]{article}
+% -------------------- Packages --------------------
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{amsmath, amssymb}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{hyperref}
+% -------------------- Formatting --------------------
+\setstretch{1.2}
+\setlength{\parskip}{0.35em}
+\setlength{\parindent}{0pt}
+% -------------------- Macros --------------------
+\newcommand{\ind}{\mathbb{1}} % indicator function
+% -------------------- Document --------------------
+\begin{document}
+
+\section{Setup}
+
+\subsection{Goal}
+
+The goal is to estimate how the release of ChatGPT on November 30, 2022 affected industry portfolio excess returns differentially across industries with high versus low AI exposure.
+
+\subsection{Data}
+
+\paragraph{Industry portfolio returns.}
+
+The return data are the Fama--French 49 Industry Portfolios at monthly frequency. Each portfolio aggregates multiple underlying industries and many firms. Let $R_{p,t}$ be the monthly return of portfolio $p$ in month $t$. Two portfolio return constructions are used:
+
+\begin{itemize}[leftmargin=*]
+  \item Value-weighted (VW): constituent firms weighted by market capitalization.
+  \item Equal-weighted (EW): constituent firms weighted equally.
+\end{itemize}
+
+Of the 49 portfolios, 43 receive AI exposure measures; the remaining 6 have no NAICS-4 industries mapped through the SIC crosswalk and are excluded.
+
+\paragraph{Risk-free rate.}
+
+Let $RF_t$ be the monthly risk-free rate (one-month Treasury bill).
+
+\paragraph{Factors.}
+
+Let $F_t$ be a vector of monthly factor realizations from the Ken French Data Library:
+
+\begin{itemize}[leftmargin=*]
+  \item $(MKT\text{-}RF)_t$: market excess return.
+  \item $SMB_t$: size factor (small minus big).
+  \item $HML_t$: value factor (high minus low book-to-market).
+  \item $RMW_t$: profitability factor (robust minus weak).
+  \item $CMA_t$: investment factor (conservative minus aggressive).
+  \item $MOM_t$: momentum factor (winners minus losers based on past returns).
+\end{itemize}
+
+\paragraph{AI exposure.}
+
+Each portfolio $p$ is assigned a scalar AI exposure measure. The baseline measure is AIIE (AI Industry Exposure) from Felten et al.\ (2023), which captures exposure to language modeling capabilities. Two aggregation schemes map the NAICS-level scores to FF49 portfolios:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Equal-weighted (EW)}: simple average of AIIE across all NAICS-4 industries assigned to portfolio $p$.
+  \item \textbf{Value-added weighted (VW)}: BEA value-added weighted average across NAICS-4 industries assigned to portfolio $p$.
+\end{itemize}
+
+A standardized version is used in regressions:
+\begin{equation}
+  \text{AIIE}^{z}_p \equiv \frac{\text{AIIE}_p - \overline{\text{AIIE}}}{\text{sd}(\text{AIIE})}.
+\end{equation}
+
+An alternative measure, ExpWB (Exposure Weighted by Wage Bill Share), constructs portfolio-level exposure bottom-up from occupation-level AIOE scores weighted by each occupation's wage bill share within the industry. This is used as a robustness check.
+
+\subsection{Variables}
+
+\paragraph{Outcome.}
+
+The dependent variable is the monthly excess return:
+\begin{equation}
+  r_{p,t} \equiv R_{p,t} - RF_t.
+\end{equation}
+
+The baseline uses EW excess returns; VW excess returns are used in a robustness check. Returns and exposure type are always matched: EW exposure corresponds to EW returns, and VW exposure to VW returns.
+
+\paragraph{Treatment.}
+
+Portfolios are ranked cross-sectionally by $\text{AIIE}^z_p$ and assigned to a binary treatment indicator:
+\begin{equation}
+  Treated_p =
+  \begin{cases}
+    1 & \text{if } \text{AIIE}^z_p \geq q_{75}, \\
+    0 & \text{if } \text{AIIE}^z_p \leq q_{25},
+  \end{cases}
+\end{equation}
+where $q_{25}$ and $q_{75}$ are the 25th and 75th percentiles of the exposure distribution across the 43 portfolios. Portfolios in the interquartile range are dropped from the sample.
+
+\paragraph{Event windows.}
+
+Define two post-event indicators:
+\begin{align}
+  Post^{(1)}_t &= \ind\{t = \text{Dec 2022}\}, \\
+  Post^{(2)}_t &= \ind\{t \in \{\text{Dec 2022},\ \text{Jan 2023}\}\}.
+\end{align}
+
+The baseline uses $Post^{(2)}_t$ (two-month event window). The rationale is that December 2022 was dominated by a broad market decline (${\sim}{-}7\%$), which drowned the AI exposure signal; in January 2023, a broad market rally (${\sim}{+}14\%$) allowed the AI exposure differential to emerge.
+
+\paragraph{Sample.}
+
+The baseline sample spans 60 months before the event through February 2023 (i.e., December 2017 to February 2023). A robustness check extends the pre-event window to 120 months.
+
+\section{Baseline}
+
+\subsection{DiD model}
+
+The baseline specification estimates:
+\begin{equation}
+  r_{p,t}
+  =
+  \mu_p
+  +
+  \gamma\Big(Post^{(2)}_t \times Treated_p\Big)
+  +
+  \sum_{k \in \mathcal{K}}
+  \beta_{k}\,F_{k,t}
+  +
+  \varepsilon_{p,t},
+  \label{eq:baseline}
+\end{equation}
+where $\mu_p$ are portfolio fixed effects, and $\mathcal{K}$ indexes the Fama--French five-factor set
+\begin{equation}
+  F^{FF5}_t
+  \equiv
+  \big((MKT\text{-}RF)_t,\; SMB_t,\; HML_t,\; RMW_t,\; CMA_t\big),
+\end{equation}
+with common slopes across portfolios (not portfolio-specific loadings).
+
+Portfolio fixed effects absorb all time-invariant cross-sectional heterogeneity, including the $Treated_p$ main effect. Month fixed effects are \emph{not} included because the Fama--French factors, which vary only over time, would be perfectly collinear with month dummies; the factors serve as explicit time-varying controls instead. Standard errors are OLS (non-robust) in the baseline specification.
+
+The coefficient of interest $\gamma$ captures the average differential excess return between high-exposure (Q4) and low-exposure (Q1) portfolios in the post-event window, after controlling for systematic factor exposure.
+
+\section{Robustness}
+
+\subsection{Parallel trends (event study)}
+
+\subsubsection{Event Time and Dummies}
+
+Let $\tau(t)$ denote event time in months relative to December 2022, with $\tau(t)=0$ for December 2022 and $\tau(t)=-1$ for November 2022. Define:
+\begin{equation}
+  D_{\tau,t} \equiv \ind\{\tau(t)=\tau\}.
+\end{equation}
+
+\paragraph{Specification.}
+
+Estimate:
+\begin{equation}
+  r_{p,t}
+  =
+  \mu_p
+  +
+  \sum_{\tau \in \mathcal{T},\ \tau \neq -1}
+  \gamma_{\tau}\Big(D_{\tau,t} \times Treated_p\Big)
+  +
+  \sum_{k \in \mathcal{K}}
+  \beta_{k}\,F_{k,t}
+  +
+  \varepsilon_{p,t},
+  \label{eq:eventstudy}
+\end{equation}
+where $\mathcal{T}=\{-12,\ldots,-2,0,1,2\}$ and $\tau=-1$ (November 2022) is the omitted reference period. The event-study window uses a 12-month pre-period.
+
+\paragraph{Pre-trends test.}
+
+The parallel trends assumption is assessed via:
+\begin{equation}
+  H_0:\ \gamma_{\tau}=0 \quad \forall\ \tau \in \{-12,\ldots,-2\}.
+\end{equation}
+
+Evaluation criteria include: (i)~the number of individually significant pre-event coefficients at the 10\% level, (ii)~the maximum absolute $t$-statistic, and (iii)~a joint $F$-test of all pre-event coefficients.
+
+\subsection{Robustness checks}
+
+Each robustness check modifies exactly one parameter from the baseline specification, holding all others fixed.
+
+\paragraph{Exposure measure (R1--R2).}
+
+\begin{enumerate}[label=R\arabic*., leftmargin=*]
+  \item \textbf{2021 AIIE}: Replace the 2023 language-model AIIE with the 2021 broader-AI vintage ($\text{AIIE}_{21}$, EW, $z$-scored).
+  \item \textbf{VW weighting}: Replace EW aggregation with value-added weighted aggregation ($\text{AIIE}_{23}$, VW, $z$-scored), using VW returns.
+  \item[\textbf{R7.}] \textbf{ExpWB}: Replace AIIE with the occupation-level wage-bill-weighted exposure measure ($\text{ExpWB}_{23}$, EW, $z$-scored).
+\end{enumerate}
+
+\paragraph{Post-window length (R3).}
+
+\begin{enumerate}[label=R\arabic*., start=3, leftmargin=*]
+  \item \textbf{Post 1 month}: Use $Post^{(1)}_t$ (December 2022 only).
+\end{enumerate}
+
+\paragraph{Pre-event sample length (R4).}
+
+\begin{enumerate}[label=R\arabic*., start=4, leftmargin=*]
+  \item \textbf{120-month pre-window}: Extend the sample to December 2012--February 2023.
+\end{enumerate}
+
+\paragraph{Factor model (R5).}
+
+\begin{enumerate}[label=R\arabic*., start=5, leftmargin=*]
+  \item \textbf{FF5 + MOM}: Add momentum to the Fama--French five-factor set.
+\end{enumerate}
+
+\paragraph{Inference (R6).}
+
+\begin{enumerate}[label=R\arabic*., start=6, leftmargin=*]
+  \item \textbf{Clustered SE}: Cluster standard errors at the month level.
+\end{enumerate}
+
+\paragraph{Placebo dates.}
+
+The baseline event-study specification is re-estimated at two placebo event months in the pre-period (January 2022 and April 2022), selected for producing statistically insignificant $\tau=+1$ coefficients with opposite signs, confirming no systematic pre-existing differential between treated and control portfolios.
+
+\subsection{Empirical Outputs}
+
+Figure~1 reports event-study coefficients $\widehat{\gamma}_{\tau}$ with 95\% confidence intervals. Table~1 reports the baseline DiD estimate $\widehat{\gamma}$ and all robustness checks. Table~2 reports the time-placebo test results.
+
+\end{document}

@@ -1,0 +1,159 @@
+# chatgpt-shock configuration
+
+# =============================================================================
+# EVENT STUDY DATES
+# =============================================================================
+
+event:
+  # ChatGPT public release
+  event_date: "2022-11-30"
+
+  # Pre-event window (3 months before)
+  pre_window_start: "2022-09-01"
+  pre_window_end: "2022-11-30"
+
+  # Post-event window (3 months after)
+  post_window_start: "2022-12-01"
+  post_window_end: "2023-02-28"
+
+# Factor model estimation window (60 months before event window)
+estimation:
+  start: "2017-09-01"
+  end: "2022-08-31"
+
+# =============================================================================
+# DATA SOURCES
+# =============================================================================
+
+data:
+  # Ken French Data Library
+  french:
+    base_url: "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp"
+
+    # Each dataset: folder name -> zip filename
+    datasets:
+      # 49 Industry Portfolios
+      49_industry_portfolios_monthly: "49_Industry_Portfolios_CSV.zip"
+      49_industry_portfolios_daily: "49_Industry_Portfolios_daily_CSV.zip"
+
+      # Industry Definitions (SIC codes)
+      industry_definitions: "Siccodes49.zip"
+
+      # Fama-French 3 Factors
+      ff3_factors_monthly: "F-F_Research_Data_Factors_CSV.zip"
+      ff3_factors_daily: "F-F_Research_Data_Factors_daily_CSV.zip"
+
+      # Fama-French 5 Factors
+      ff5_factors_monthly: "F-F_Research_Data_5_Factors_2x3_CSV.zip"
+      ff5_factors_daily: "F-F_Research_Data_5_Factors_2x3_daily_CSV.zip"
+
+      # Momentum Factor
+      momentum_monthly: "F-F_Momentum_Factor_CSV.zip"
+      momentum_daily: "F-F_Momentum_Factor_daily_CSV.zip"
+
+  # Felten et al. AIOE/AIIE
+  felten:
+    base_url: "https://raw.githubusercontent.com/AIOE-Data/AIOE/main"
+    aioe_2021_file: "AIOE_DataAppendix.xlsx"
+    aiie_lm_2023_file: "Language Modeling AIOE and AIIE.xlsx"
+    aiie_ig_2023_file: "Image Generation AIOE and AIIE.xlsx"
+
+  # BLS OEWS
+  bls:
+    base_url: "https://www.bls.gov/oes/special-requests"
+    oews_year: 2022
+    oews_file: "oesm22in4.zip"  # National industry-specific, May 2022
+
+  # BEA Industry Accounts
+  bea:
+    year: 2022
+    # Note: BEA data requires manual download or API key
+
+# =============================================================================
+# ANALYSIS PARAMETERS
+# =============================================================================
+
+analysis:
+  # Portfolio weighting
+  portfolio_weighting: "value_weighted"  # Options: value_weighted, equal_weighted
+
+  # Clustering for standard errors
+  cluster_level: "industry"  # Options: industry, time, two_way
+
+  # Standardize AdoptionAI index
+  standardize_index: true
+
+# =============================================================================
+# INDUSTRY FILTERS
+# =============================================================================
+
+industries:
+  # Upstream AI providers to potentially exclude
+  upstream_ff49:
+    - "Comps"   # Computers
+    - "Softw"   # Computer Software
+    - "Chips"   # Electronic Equipment
+
+  # Total number of FF49 industries
+  n_industries: 49
+
+# =============================================================================
+# FILE PATHS
+# =============================================================================
+
+paths:
+  raw_data: "data/raw"
+  processed_data: "data/processed"
+  crosswalks: "data/crosswalks"
+  outputs: "outputs"
+  figures: "outputs/figures"
+  tables: "outputs/tables"
+  logs: "outputs/logs"
+
+# =============================================================================
+# ROBUSTNESS SPECIFICATIONS
+# =============================================================================
+
+robustness:
+  # Alternative event windows
+  windows:
+    - name: "2m"
+      pre_months: 2
+      post_months: 2
+    - name: "3m"
+      pre_months: 3
+      post_months: 3
+    - name: "4m"
+      pre_months: 4
+      post_months: 4
+
+  # Alternative AI exposure measures
+  exposure_measures:
+    - "aiie_2021"           # Original narrow AI
+    - "aiie_lm_2023"        # Language modeling specific
+    - "aiie_comp_weighted"  # Compensation-weighted
+
+  # Alternative dependent variables
+  dependent_vars:
+    - "abnormal_returns"    # FF5-adjusted
+    - "excess_returns"      # Raw - RF
+    - "raw_returns"         # Unadjusted
+
+# =============================================================================
+# HETEROGENEITY ANALYSIS
+# =============================================================================
+
+heterogeneity:
+  # Splits for subgroup analysis
+  splits:
+    - name: "ai_exposure"
+      variable: "aiie"
+      groups: ["high", "low"]  # Median split
+
+    - name: "labor_intensity"
+      variable: "labor_share"
+      groups: ["high", "low"]
+
+    - name: "sector"
+      variable: "sector_type"
+      groups: ["services", "manufacturing"]
