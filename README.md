@@ -70,3 +70,6 @@ The repository also retains downstream event-study code as an experimental appli
 ## Status
 
 The exposure-index construction is public and reproducible. Downstream research using the index is ongoing.
+
+The self-contained methodological appendix is available at
+[`paper/ai-exposure-methodology.pdf`](paper/ai-exposure-methodology.pdf). It records the data vintages, crosswalk, formulas, aggregation choices, validation checks, and current limitations without relying on the unfinished return application.
