@@ -1,0 +1,312 @@
+naics_4,ff49,ff49_abbrev,ff49_name
+1111,1,Agric,Agriculture
+1112,1,Agric,Agriculture
+1113,1,Agric,Agriculture
+1114,1,Agric,Agriculture
+1119,1,Agric,Agriculture
+1121,1,Agric,Agriculture
+1122,1,Agric,Agriculture
+1123,1,Agric,Agriculture
+1124,1,Agric,Agriculture
+1125,1,Agric,Agriculture
+1129,1,Agric,Agriculture
+1131,17,BldMt,Construction Materials
+1132,17,BldMt,Construction Materials
+1133,17,BldMt,Construction Materials
+1141,1,Agric,Agriculture
+1142,6,Toys,Recreation
+1151,1,Agric,Agriculture
+1152,1,Agric,Agriculture
+1153,17,BldMt,Construction Materials
+2111,30,Oil,Petroleum and Natural Gas
+2121,29,Coal,Coal
+2122,28,Mines,Non-Metallic and Industrial Metal Mining
+2123,28,Mines,Non-Metallic and Industrial Metal Mining
+2131,30,Oil,Petroleum and Natural Gas
+2211,31,Util,Utilities
+2212,31,Util,Utilities
+2213,49,Other,Almost Nothing
+2361,18,Cnstr,Construction
+2362,18,Cnstr,Construction
+2371,18,Cnstr,Construction
+2372,47,RlEst,Real Estate
+2373,18,Cnstr,Construction
+2379,18,Cnstr,Construction
+2381,18,Cnstr,Construction
+2382,18,Cnstr,Construction
+2383,18,Cnstr,Construction
+2389,18,Cnstr,Construction
+3111,1,Agric,Agriculture
+3112,2,Food,Food Products
+3113,3,Soda,Candy & Soda
+3114,2,Food,Food Products
+3115,2,Food,Food Products
+3116,2,Food,Food Products
+3117,2,Food,Food Products
+3118,2,Food,Food Products
+3119,2,Food,Food Products
+3121,4,Beer,Beer & Liquor
+3122,5,Smoke,Tobacco Products
+3131,16,Txtls,Textiles
+3132,16,Txtls,Textiles
+3133,16,Txtls,Textiles
+3141,9,Hshld,Consumer Goods
+3149,16,Txtls,Textiles
+3151,16,Txtls,Textiles
+3152,10,Clths,Apparel
+3159,10,Clths,Apparel
+3161,10,Clths,Apparel
+3162,10,Clths,Apparel
+3169,9,Hshld,Consumer Goods
+3211,17,BldMt,Construction Materials
+3212,17,BldMt,Construction Materials
+3219,17,BldMt,Construction Materials
+3221,39,Paper,Business Supplies
+3222,39,Paper,Business Supplies
+3231,8,Books,Printing and Publishing
+3241,30,Oil,Petroleum and Natural Gas
+3251,14,Chems,Chemicals
+3252,14,Chems,Chemicals
+3253,14,Chems,Chemicals
+3254,13,Drugs,Pharmaceutical Products
+3255,14,Chems,Chemicals
+3256,9,Hshld,Consumer Goods
+3259,14,Chems,Chemicals
+3261,15,Rubbr,Rubber and Plastic Products
+3262,15,Rubbr,Rubber and Plastic Products
+3271,17,BldMt,Construction Materials
+3272,9,Hshld,Consumer Goods
+3273,17,BldMt,Construction Materials
+3274,17,BldMt,Construction Materials
+3279,17,BldMt,Construction Materials
+3311,19,Steel,Steel Works Etc
+3312,19,Steel,Steel Works Etc
+3313,19,Steel,Steel Works Etc
+3314,19,Steel,Steel Works Etc
+3315,19,Steel,Steel Works Etc
+3321,20,FabPr,Fabricated Products
+3322,17,BldMt,Construction Materials
+3323,17,BldMt,Construction Materials
+3324,20,FabPr,Fabricated Products
+3325,17,BldMt,Construction Materials
+3326,17,BldMt,Construction Materials
+3327,17,BldMt,Construction Materials
+3328,19,Steel,Steel Works Etc
+3329,17,BldMt,Construction Materials
+3331,21,Mach,Machinery
+3332,21,Mach,Machinery
+3333,21,Mach,Machinery
+3334,21,Mach,Machinery
+3335,21,Mach,Machinery
+3336,21,Mach,Machinery
+3339,21,Mach,Machinery
+3341,35,Hardw,Computers
+3342,37,Chips,Electronic Equipment
+3343,6,Toys,Recreation
+3344,37,Chips,Electronic Equipment
+3345,38,LabEq,Measuring and Control Equipment
+3346,35,Hardw,Computers
+3351,22,ElcEq,Electrical Equipment
+3352,9,Hshld,Consumer Goods
+3353,22,ElcEq,Electrical Equipment
+3359,22,ElcEq,Electrical Equipment
+3361,23,Autos,Automobiles and Trucks
+3362,23,Autos,Automobiles and Trucks
+3363,23,Autos,Automobiles and Trucks
+3364,24,Aero,Aircraft
+3365,21,Mach,Machinery
+3366,6,Toys,Recreation
+3369,23,Autos,Automobiles and Trucks
+3371,9,Hshld,Consumer Goods
+3372,39,Paper,Business Supplies
+3379,9,Hshld,Consumer Goods
+3391,12,MedEq,Medical Equipment
+3399,9,Hshld,Consumer Goods
+4231,42,Whlsl,Wholesale
+4232,42,Whlsl,Wholesale
+4233,42,Whlsl,Wholesale
+4234,42,Whlsl,Wholesale
+4235,42,Whlsl,Wholesale
+4236,42,Whlsl,Wholesale
+4237,42,Whlsl,Wholesale
+4238,42,Whlsl,Wholesale
+4239,42,Whlsl,Wholesale
+4241,42,Whlsl,Wholesale
+4242,42,Whlsl,Wholesale
+4243,42,Whlsl,Wholesale
+4244,42,Whlsl,Wholesale
+4245,42,Whlsl,Wholesale
+4246,42,Whlsl,Wholesale
+4247,42,Whlsl,Wholesale
+4248,42,Whlsl,Wholesale
+4249,42,Whlsl,Wholesale
+4251,42,Whlsl,Wholesale
+4411,43,Rtail,Retail
+4412,43,Rtail,Retail
+4413,42,Whlsl,Wholesale
+4421,42,Whlsl,Wholesale
+4422,43,Rtail,Retail
+4431,42,Whlsl,Wholesale
+4441,42,Whlsl,Wholesale
+4442,42,Whlsl,Wholesale
+4451,43,Rtail,Retail
+4452,43,Rtail,Retail
+4453,42,Whlsl,Wholesale
+4461,42,Whlsl,Wholesale
+4471,43,Rtail,Retail
+4481,43,Rtail,Retail
+4482,42,Whlsl,Wholesale
+4483,43,Rtail,Retail
+4511,42,Whlsl,Wholesale
+4512,43,Rtail,Retail
+4521,43,Rtail,Retail
+4529,43,Rtail,Retail
+4531,43,Rtail,Retail
+4532,42,Whlsl,Wholesale
+4533,43,Rtail,Retail
+4539,42,Whlsl,Wholesale
+4541,43,Rtail,Retail
+4542,43,Rtail,Retail
+4543,43,Rtail,Retail
+4811,41,Trans,Transportation
+4812,41,Trans,Transportation
+4821,41,Trans,Transportation
+4831,41,Trans,Transportation
+4832,41,Trans,Transportation
+4841,41,Trans,Transportation
+4842,41,Trans,Transportation
+4851,41,Trans,Transportation
+4852,41,Trans,Transportation
+4853,41,Trans,Transportation
+4854,41,Trans,Transportation
+4855,41,Trans,Transportation
+4859,41,Trans,Transportation
+4861,41,Trans,Transportation
+4862,31,Util,Utilities
+4869,41,Trans,Transportation
+4871,41,Trans,Transportation
+4872,7,Fun,Entertainment
+4879,7,Fun,Entertainment
+4881,41,Trans,Transportation
+4882,41,Trans,Transportation
+4883,41,Trans,Transportation
+4884,41,Trans,Transportation
+4885,41,Trans,Transportation
+4889,41,Trans,Transportation
+4911,34,BusSv,Business Services
+4921,41,Trans,Transportation
+4922,41,Trans,Transportation
+4931,34,BusSv,Business Services
+5111,8,Books,Printing and Publishing
+5112,36,Softw,Computer Software
+5121,7,Fun,Entertainment
+5122,34,BusSv,Business Services
+5151,32,Telcm,Communication
+5152,32,Telcm,Communication
+5161,8,Books,Printing and Publishing
+5171,32,Telcm,Communication
+5172,32,Telcm,Communication
+5173,32,Telcm,Communication
+5174,32,Telcm,Communication
+5175,32,Telcm,Communication
+5179,32,Telcm,Communication
+5181,34,BusSv,Business Services
+5182,34,BusSv,Business Services
+5191,34,BusSv,Business Services
+5211,45,Banks,Banking
+5221,45,Banks,Banking
+5222,45,Banks,Banking
+5223,45,Banks,Banking
+5231,48,Fin,Trading
+5232,48,Fin,Trading
+5239,48,Fin,Trading
+5241,46,Insur,Insurance
+5242,46,Insur,Insurance
+5251,46,Insur,Insurance
+5259,48,Fin,Trading
+5311,47,RlEst,Real Estate
+5312,47,RlEst,Real Estate
+5313,47,RlEst,Real Estate
+5321,33,PerSv,Personal Services
+5322,7,Fun,Entertainment
+5323,34,BusSv,Business Services
+5324,34,BusSv,Business Services
+5331,48,Fin,Trading
+5411,33,PerSv,Personal Services
+5412,34,BusSv,Business Services
+5413,34,BusSv,Business Services
+5414,34,BusSv,Business Services
+5415,34,BusSv,Business Services
+5416,34,BusSv,Business Services
+5417,34,BusSv,Business Services
+5418,34,BusSv,Business Services
+5419,34,BusSv,Business Services
+5511,48,Fin,Trading
+5611,34,BusSv,Business Services
+5612,34,BusSv,Business Services
+5613,34,BusSv,Business Services
+5614,34,BusSv,Business Services
+5615,41,Trans,Transportation
+5616,34,BusSv,Business Services
+5617,34,BusSv,Business Services
+5619,34,BusSv,Business Services
+5621,41,Trans,Transportation
+5622,49,Other,Almost Nothing
+5629,49,Other,Almost Nothing
+6111,33,PerSv,Personal Services
+6112,33,PerSv,Personal Services
+6113,33,PerSv,Personal Services
+6114,33,PerSv,Personal Services
+6115,33,PerSv,Personal Services
+6116,33,PerSv,Personal Services
+6117,33,PerSv,Personal Services
+6211,11,Hlth,Healthcare
+6212,11,Hlth,Healthcare
+6213,11,Hlth,Healthcare
+6214,11,Hlth,Healthcare
+6215,11,Hlth,Healthcare
+6216,11,Hlth,Healthcare
+6219,11,Hlth,Healthcare
+6221,11,Hlth,Healthcare
+6222,11,Hlth,Healthcare
+6223,11,Hlth,Healthcare
+6231,11,Hlth,Healthcare
+6232,11,Hlth,Healthcare
+6233,11,Hlth,Healthcare
+6239,33,PerSv,Personal Services
+6241,33,PerSv,Personal Services
+6242,33,PerSv,Personal Services
+6243,33,PerSv,Personal Services
+6244,33,PerSv,Personal Services
+7111,7,Fun,Entertainment
+7112,7,Fun,Entertainment
+7113,7,Fun,Entertainment
+7114,7,Fun,Entertainment
+7115,7,Fun,Entertainment
+7121,33,PerSv,Personal Services
+7131,7,Fun,Entertainment
+7132,7,Fun,Entertainment
+7139,7,Fun,Entertainment
+7211,44,Meals,"Restaurants, Hotels, Motels"
+7212,33,PerSv,Personal Services
+7213,33,PerSv,Personal Services
+7221,44,Meals,"Restaurants, Hotels, Motels"
+7222,44,Meals,"Restaurants, Hotels, Motels"
+7223,44,Meals,"Restaurants, Hotels, Motels"
+7224,44,Meals,"Restaurants, Hotels, Motels"
+8111,33,PerSv,Personal Services
+8112,33,PerSv,Personal Services
+8113,33,PerSv,Personal Services
+8114,33,PerSv,Personal Services
+8121,33,PerSv,Personal Services
+8122,33,PerSv,Personal Services
+8123,33,PerSv,Personal Services
+8129,33,PerSv,Personal Services
+8131,33,PerSv,Personal Services
+8132,33,PerSv,Personal Services
+8133,33,PerSv,Personal Services
+8134,33,PerSv,Personal Services
+8139,33,PerSv,Personal Services
+8141,33,PerSv,Personal Services
+9211,33,PerSv,Personal Services
+9221,33,PerSv,Personal Services

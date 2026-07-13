@@ -1,67 +1,68 @@
-# ChatGPT Shock Event Study
+# AI Exposure Across Industries
 
-An empirical project on whether US industry portfolios with greater exposure to artificial intelligence earned different returns around the public release of ChatGPT on 30 November 2022.
+A reproducible pipeline for measuring how exposed US industries are to artificial intelligence through their occupational composition.
 
 ## Research question
 
-Did the release of ChatGPT coincide with a differential repricing of industries that were more exposed to AI-related tasks?
+How can industry-level AI exposure be constructed from occupational exposure scores, employment, wages, and consistent industry crosswalks?
 
-## Method
+The project treats exposure as a measurement problem before using it in any outcome analysis. It produces two complementary measures:
 
-The project combines:
+- **AIIE:** a direct industry exposure measure derived from Felten, Raj, and Seamans.
+- **ExpWB:** a bottom-up measure that weights occupational AI exposure by each occupation's wage bill within an industry.
 
-- Fama-French 49 industry portfolio returns;
-- FF3, FF5, and momentum factors;
-- Felten, Raj, and Seamans AI-exposure measures;
-- BLS occupational employment and wage data;
-- BEA industry weights;
-- difference-in-differences and event-study specifications.
+For industry `i`, the wage-bill-weighted measure is:
 
-The design compares top- and bottom-quartile exposure portfolios around the release. It is an event study, not a clean causal experiment.
+```text
+ExpWB_i = sum_o(AIOE_o * wage_bill_io) / sum_o(wage_bill_io)
+```
 
-## Current evidence
+## Construction
 
-The baseline FF5 specification estimates a positive two-month differential of 2.36 percentage points (`p = 0.034`). The estimate is sensitive to several reasonable alternatives:
+The pipeline combines:
 
-| Specification | Estimate | p-value |
-|---|---:|---:|
-| FF5 baseline | +2.36 | 0.034 |
-| Value-weighted exposure | +0.24 | 0.825 |
-| December only | -0.88 | 0.577 |
-| FF5 + momentum | +1.58 | 0.161 |
-| Standard errors clustered by month | +2.36 | 0.287 |
+1. occupational and industry AI-exposure scores from Felten, Raj, and Seamans;
+2. BLS Occupational Employment and Wage Statistics;
+3. BEA industry data and concordances;
+4. NAICS, SIC, and Fama-French 49 industry mappings;
+5. equal-weighted and value-weighted portfolio aggregation.
 
-Pre-period coefficients are jointly insignificant in the reported event study, but two placebo dates are individually significant. The result should therefore be read as suggestive evidence under revision, not as a settled market effect.
+The public outputs currently cover 43 of the 49 Fama-French industry portfolios. The remaining portfolios do not pass the available industry-mapping and data-coverage checks.
 
-Selected aggregate outputs are stored in `results/`. Raw and processed datasets are generated locally and excluded from Git.
+## Public outputs
 
-## Reproduce
+`results/` contains derived, aggregate research outputs:
+
+- `ff49_exposure_measures.csv`: AI-exposure measures at the Fama-French 49 portfolio level;
+- `naics_measures.csv`: industry measures before portfolio aggregation;
+- `naics_to_ff49_mapping.csv`: the auditable industry-to-portfolio crosswalk.
+
+No proprietary data or credentials are included. The repository downloads or rebuilds source inputs locally where licensing permits.
+
+## Reproduce the index
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
-python scripts/run_all.py
+python scripts/01_download_data.py
+python scripts/02_build_exposures.py
 ```
 
-A free BEA API key is required for the BEA download step. Other inputs are downloaded from their cited public sources.
+A free BEA API key is required for the BEA download step. Other inputs come from the public sources documented in `docs/methodology.md`.
 
-To reuse existing local downloads:
-
-```bash
-python scripts/run_all.py --skip-download --skip-ipp
-```
+The repository also retains downstream event-study code as an experimental application of the measures. Those return estimates are not the headline result and remain under methodological revision.
 
 ## Repository map
 
-- `scripts/`: pipeline orchestration, estimators, checks, and output generation.
-- `src/data/`: data-source adapters and crosswalk construction.
-- `docs/`: methodology and specification notes.
-- `results/`: selected aggregate estimates and a pre-trends figure.
-- `data/`: local raw and processed inputs; contents are ignored.
-- `outputs/`: generated local outputs; contents are ignored.
+- `scripts/`: downloads, exposure construction, mapping checks, and downstream experiments.
+- `src/data/`: source adapters and crosswalk logic.
+- `docs/`: methodology, empirical-design, and specification notes.
+- `results/`: selected aggregate exposure measures and mappings.
+- `data/`: local source and intermediate data; contents are excluded from Git.
+- `outputs/`: generated local analysis outputs; contents are excluded from Git.
 
 ## Status
 
-Research project under methodological revision. The code reproduces the current estimates; the interpretation remains deliberately cautious.
+The exposure-index construction is public and reproducible. Downstream research using the index is ongoing.
