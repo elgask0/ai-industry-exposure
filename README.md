@@ -36,6 +36,10 @@ The public outputs currently cover 43 of the 49 Fama-French industry portfolios.
 - `ff49_exposure_measures.csv`: AI-exposure measures at the Fama-French 49 portfolio level;
 - `naics_measures.csv`: industry measures before portfolio aggregation;
 - `naics_to_ff49_mapping.csv`: the auditable industry-to-portfolio crosswalk.
+- `industry-exposure-ranking.png`: selected high- and low-exposure FF49 portfolios;
+- `exposure-measure-concordance.png`: comparison of the direct and wage-bill constructions.
+
+The 2023 equal-weighted versions of AIIE and ExpWB have a cross-industry correlation of `0.968`. That agreement is useful because the measures are constructed differently: one begins with direct industry scores, while the other aggregates occupational exposure through employment and wages.
 
 No proprietary data or credentials are included. The repository downloads or rebuilds source inputs locally where licensing permits.
 
